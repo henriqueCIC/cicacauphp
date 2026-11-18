@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Legislation extends Model
+{
+    protected $fillable = [
+        'user_id',
+        'title',
+        'description',
+        'original_publication_date',
+        'source',
+        'file',
+        'external_link',
+        'published_at',
+    ];
+
+    protected $casts = [
+        'original_publication_date' => 'date',
+        'published_at' => 'datetime',
+    ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->orderBy('published_at', 'desc');
+    }
+}

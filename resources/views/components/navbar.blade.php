@@ -89,6 +89,7 @@
                         <a href="{{ route('noticias.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white transition-colors">Notícias</a>
                         <a href="{{ route('cursos-eventos.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white transition-colors">Cursos e Eventos</a>
                         <a href="{{ route('entrevistas.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white transition-colors">Entrevistas</a>
+                        <a href="{{ route('legislacao.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary hover:text-white transition-colors">Legislação</a>
                     </div>
                 </div>
 
@@ -186,6 +187,7 @@
                     <a href="{{ route('noticias.index') }}" class="block px-3 py-2 text-sm text-gray-600 hover:text-primary rounded-md">Notícias</a>
                     <a href="{{ route('cursos-eventos.index') }}" class="block px-3 py-2 text-sm text-gray-600 hover:text-primary rounded-md">Cursos e Eventos</a>
                     <a href="{{ route('entrevistas.index') }}" class="block px-3 py-2 text-sm text-gray-600 hover:text-primary rounded-md">Entrevistas</a>
+                    <a href="{{ route('legislacao.index') }}" class="block px-3 py-2 text-sm text-gray-600 hover:text-primary rounded-md">Legislação</a>
                 </div>
             </div>
 

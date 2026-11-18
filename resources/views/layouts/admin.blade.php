@@ -117,6 +117,10 @@
                             </svg>
                             Entrevistas
                         </a>
+                        <a href="{{ route('admin.legislations.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-300 rounded-lg hover:bg-gray-800 hover:text-white transition-colors {{ request()->routeIs('admin.legislations.*') ? 'bg-gray-800 text-white' : '' }}">
+                            <span class="w-5 h-5 text-center" aria-hidden="true">§</span>
+                            Legislação
+                        </a>
                     </div>
 
                     <!-- Mercado Section -->

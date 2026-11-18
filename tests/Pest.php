@@ -41,7 +41,14 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function legislationPayload(array $overrides = []): array
 {
-    // ..
+    return array_merge([
+        'title' => 'Lei de teste',
+        'description' => 'Descrição da legislação.',
+        'original_publication_date' => '2024-06-12',
+        'source' => 'Diário Oficial da União',
+        'file' => Illuminate\Http\UploadedFile::fake()->create('lei.pdf', 100, 'application/pdf'),
+        'external_link' => 'https://example.org/lei',
+    ], $overrides);
 }

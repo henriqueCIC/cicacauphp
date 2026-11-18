@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProductionCostController as AdminProductionCostCo
 use App\Http\Controllers\Admin\MarketDataController as AdminMarketDataController;
 use App\Http\Controllers\Admin\CourseEventController as AdminCourseEventController;
 use App\Http\Controllers\Admin\InterviewController as AdminInterviewController;
+use App\Http\Controllers\Admin\LegislationController as AdminLegislationController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\ProductionCostController;
 use App\Http\Controllers\MarketDataController;
 use App\Http\Controllers\CourseEventController;
 use App\Http\Controllers\InterviewController;
+use App\Http\Controllers\LegislationController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
@@ -71,6 +73,8 @@ Route::get('/cursos-eventos/{slug}', [CourseEventController::class, 'show'])->na
 Route::get('/entrevistas', [InterviewController::class, 'index'])->name('entrevistas.index');
 Route::get('/entrevistas/{slug}', [InterviewController::class, 'show'])->name('entrevistas.show');
 
+Route::get('/legislacao', [LegislationController::class, 'index'])->name('legislacao.index');
+
 // Contact Routes (Contato)
 Route::get('/contato', [ContactController::class, 'index'])->name('contato');
 Route::post('/contato', [ContactController::class, 'send'])->name('contato.send');
@@ -101,6 +105,14 @@ Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function ()
     // News Management
     Route::resource('news', AdminNewsController::class);
     Route::patch('/news/{news}/toggle-publish', [AdminNewsController::class, 'togglePublish'])->name('news.toggle-publish');
+
+    Route::get('/legislations', [AdminLegislationController::class, 'index'])->name('legislations.index');
+    Route::get('/legislations/create', [AdminLegislationController::class, 'create'])->name('legislations.create');
+    Route::post('/legislations', [AdminLegislationController::class, 'store'])->name('legislations.store');
+    Route::get('/legislations/{legislation}/edit', [AdminLegislationController::class, 'edit'])->name('legislations.edit');
+    Route::put('/legislations/{legislation}', [AdminLegislationController::class, 'update'])->name('legislations.update');
+    Route::patch('/legislations/{legislation}/toggle-publish', [AdminLegislationController::class, 'togglePublish'])->name('legislations.toggle-publish');
+    Route::delete('/legislations/{legislation}', [AdminLegislationController::class, 'destroy'])->name('legislations.destroy');
     
     // Research Management (Pesquisa)
     Route::resource('researches', AdminResearchController::class);
