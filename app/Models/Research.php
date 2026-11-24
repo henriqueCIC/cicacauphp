@@ -17,6 +17,7 @@ class Research extends Model
         'title',
         'slug',
         'type',
+        'area',
         'summary',
         'authors',
         'institution',
@@ -43,6 +44,24 @@ class Research extends Model
             'relatorio' => 'Relatório',
             'livro' => 'Livro',
             'dissertacao' => 'Dissertação/Tese',
+        ];
+    }
+
+    /**
+     * Áreas de pesquisa disponíveis
+     */
+    public static function getAreas(): array
+    {
+        return [
+            'agronomia' => 'Agronomia',
+            'biotecnologia' => 'Biotecnologia',
+            'economia_mercado' => 'Economia e Mercado',
+            'fitossanidade' => 'Fitossanidade',
+            'genetica_melhoramento' => 'Genética e Melhoramento',
+            'meio_ambiente_sustentabilidade' => 'Meio Ambiente e Sustentabilidade',
+            'producao_manejo' => 'Produção e Manejo',
+            'tecnologia_alimentos' => 'Tecnologia de Alimentos',
+            'outras' => 'Outras',
         ];
     }
 
@@ -139,6 +158,14 @@ class Research extends Model
     public function getTypeName()
     {
         return self::getTypes()[$this->type] ?? $this->type;
+    }
+
+    /**
+     * Obter nome da área formatado
+     */
+    public function getAreaName(): string
+    {
+        return self::getAreas()[$this->area] ?? 'Sem área definida';
     }
 
     /**
