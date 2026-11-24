@@ -41,7 +41,7 @@ class ResearchController extends Controller
         $years = Research::published()
             ->whereNotNull('year')
             ->distinct()
-            ->orderBy('year', 'desc')
+            ->reorder('year', 'desc')
             ->pluck('year');
 
         $types = Research::getTypes();
