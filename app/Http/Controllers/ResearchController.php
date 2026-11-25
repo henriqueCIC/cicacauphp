@@ -13,6 +13,12 @@ class ResearchController extends Controller
     public function index(Request $request)
     {
         $query = Research::published()->with('user');
+        $areas = Research::getAreas();
+
+        // Filtro por área
+        if ($request->filled('area') && array_key_exists($request->area, $areas)) {
+            $query->where('area', $request->area);
+        }
 
         // Filtro por tipo
         if ($request->filled('tipo')) {
@@ -46,7 +52,7 @@ class ResearchController extends Controller
 
         $types = Research::getTypes();
 
-        return view('pesquisa', compact('researches', 'types', 'years'));
+        return view('pesquisa', compact('researches', 'types', 'areas', 'years'));
     }
 
     /**

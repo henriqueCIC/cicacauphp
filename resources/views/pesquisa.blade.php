@@ -31,7 +31,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                 </svg>
                 Filtros
-                @if(request()->hasAny(['busca', 'tipo', 'ano']))
+                @if(request()->hasAny(['busca', 'area', 'tipo', 'ano']))
                     <span class="px-2 py-0.5 bg-primary text-white text-xs rounded-full">Ativos</span>
                 @endif
             </span>
@@ -52,10 +52,27 @@
                 <input 
                     type="text" 
                     name="busca" 
+                    aria-label="Buscar pesquisas"
                     value="{{ request('busca') }}"
                     placeholder="Buscar por título, autor, palavra-chave..."
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                 >
+            </div>
+
+            <!-- Área -->
+            <div class="w-full md:w-64">
+                <select
+                    name="area"
+                    aria-label="Filtrar por área"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                >
+                    <option value="">Todas as áreas</option>
+                    @foreach($areas as $key => $label)
+                        <option value="{{ $key }}" {{ request('area') == $key ? 'selected' : '' }}>
+                            {{ $label }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
             
             <!-- Tipo -->
@@ -96,7 +113,7 @@
                 Filtrar
             </button>
             
-            @if(request()->hasAny(['busca', 'tipo', 'ano']))
+            @if(request()->hasAny(['busca', 'area', 'tipo', 'ano']))
                 <a 
                     href="{{ route('pesquisa.index') }}" 
                     class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-all font-medium text-center"
@@ -118,12 +135,11 @@
                     <article class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group flex flex-col border border-gray-100">
                         <!-- Header com tipo -->
                         <div class="p-4 bg-gradient-to-r from-primary/10 to-secondary/10 border-b border-gray-100">
-                            <div class="flex items-center justify-between">
-                                <span class="px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full">
-                                    {{ $research->getTypeName() }}
-                                </span>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full">{{ $research->getTypeName() }}</span>
+                                <span class="px-3 py-1 bg-white text-primary text-xs font-semibold rounded-full border border-primary/20">{{ $research->getAreaName() }}</span>
                                 @if($research->year)
-                                    <span class="text-sm text-gray-600 font-medium">{{ $research->year }}</span>
+                                    <span class="text-sm text-gray-600 font-medium ml-auto">{{ $research->year }}</span>
                                 @endif
                             </div>
                         </div>
@@ -231,7 +247,7 @@
                 </svg>
                 <h3 class="text-2xl font-bold text-gray-900 mb-2">Nenhuma pesquisa encontrada</h3>
                 <p class="text-gray-600 mb-6">
-                    @if(request()->hasAny(['busca', 'tipo', 'ano']))
+                    @if(request()->hasAny(['busca', 'area', 'tipo', 'ano']))
                         Tente ajustar os filtros de busca.
                     @else
                         Em breve publicaremos pesquisas sobre o setor cacaueiro.
