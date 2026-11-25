@@ -7,6 +7,7 @@ use App\Models\Research;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class ResearchController extends Controller
 {
@@ -28,7 +29,9 @@ class ResearchController extends Controller
     public function create()
     {
         $types = Research::getTypes();
-        return view('admin.researches.create', compact('types'));
+        $areas = Research::getAreas();
+
+        return view('admin.researches.create', compact('types', 'areas'));
     }
 
     /**
@@ -39,6 +42,7 @@ class ResearchController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'type' => 'required|in:artigo,relatorio,livro,dissertacao',
+            'area' => ['required', Rule::in(array_keys(Research::getAreas()))],
             'summary' => 'required|string|max:1000',
             'authors' => 'required|string|max:500',
             'institution' => 'nullable|string|max:255',
@@ -75,7 +79,9 @@ class ResearchController extends Controller
     public function edit(Research $research)
     {
         $types = Research::getTypes();
-        return view('admin.researches.edit', compact('research', 'types'));
+        $areas = Research::getAreas();
+
+        return view('admin.researches.edit', compact('research', 'types', 'areas'));
     }
 
     /**
@@ -86,6 +92,7 @@ class ResearchController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'type' => 'required|in:artigo,relatorio,livro,dissertacao',
+            'area' => ['nullable', Rule::in(array_keys(Research::getAreas()))],
             'summary' => 'required|string|max:1000',
             'authors' => 'required|string|max:500',
             'institution' => 'nullable|string|max:255',

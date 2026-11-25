@@ -52,6 +52,27 @@
                     @enderror
                 </div>
 
+                <!-- Área -->
+                <div>
+                    <label for="area" class="block text-sm font-medium text-gray-700 mb-2">
+                        Área <span class="text-red-500">*</span>
+                    </label>
+                    <select
+                        name="area"
+                        id="area"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent @error('area') border-red-500 @enderror"
+                        required
+                    >
+                        <option value="">Selecione uma área</option>
+                        @foreach($areas as $key => $label)
+                            <option value="{{ $key }}" {{ old('area') == $key ? 'selected' : '' }}>{{ $label }}</option>
+                        @endforeach
+                    </select>
+                    @error('area')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Ano -->
                 <div>
                     <label for="year" class="block text-sm font-medium text-gray-700 mb-2">
