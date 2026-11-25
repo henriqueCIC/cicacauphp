@@ -17,9 +17,35 @@ Arquivos atuais:
 Última execução local registrada em 18/11/2026:
 
 - Legislação: 25 testes aprovados, 130 verificações;
-- suíte completa atual: 27 testes aprovados, 132 verificações.
+- suíte completa naquela data: 27 testes aprovados, 132 verificações.
 
 Os testes de integração usam `DatabaseTransactions`. Cada teste inicia uma transação e a desfaz ao terminar. `Storage::fake('public')` cria um armazenamento temporário para que os PDFs reais não sejam tocados.
+
+## Pesquisa e ajustes responsivos
+
+Arquivos de testes:
+
+- `Unit/ResearchTest.php`: áreas disponíveis e identificação de pesquisas antigas sem área;
+- `Feature/AdminResearchAreaTest.php`: seleção, obrigatoriedade, validação e edição da área pelo publicador;
+- `Feature/ResearchPageTest.php`: anos disponíveis, filtro de área, valores inválidos, exibição nos cards e detalhes e preservação dos filtros na paginação.
+
+Validação registrada em 25/11/2026: suíte completa com **40 testes aprovados e 183 verificações**; página pública de Pesquisa com **6 testes aprovados e 28 verificações**. O build de produção e `git diff --check` também passaram.
+
+Executar os testes de Pesquisa com o MySQL local temporário já migrado e uma `APP_KEY` de teste configurada no ambiente:
+
+```bash
+DB_CONNECTION=mysql DB_HOST=127.0.0.1 DB_PORT=3306 DB_DATABASE=cicacau_temp_local DB_USERNAME=root DB_PASSWORD= SESSION_DRIVER=file CACHE_STORE=file QUEUE_CONNECTION=sync php artisan test tests/Unit/ResearchTest.php tests/Feature/AdminResearchAreaTest.php tests/Feature/ResearchPageTest.php
+```
+
+Para executar a suíte completa no mesmo banco, use o comando acima sem os três caminhos de arquivos. Nunca aponte esses comandos para produção.
+
+Comportamento responsivo em `resources/views/pesquisa.blade.php`:
+
+- abaixo de 1024 px, os filtros são recolhíveis e aparecem verticalmente quando abertos;
+- a partir de 1024 px, os filtros aparecem em linha, com a busca ocupando o espaço restante e Área/Tipo com a mesma largura;
+- o cabeçalho compartilhado em `resources/views/components/navbar.blade.php` usa o menu compacto abaixo de 1280 px, evitando a sobreposição entre Contato, busca e login.
+
+Foram inspecionadas capturas do Chrome em 390, 768 e 1024 px. A emulação mobile em 390 px confirmou ausência de rolagem horizontal e filtros expandidos com largura completa. Após o ajuste do cabeçalho, a captura em 1024 px confirmou o menu compacto sem sobreposição. A conferência anterior de tela cheia foi mantida como referência; não houve nova captura de tela cheia após esse ajuste. Não foram usados aparelhos físicos.
 
 ## Como executar
 

@@ -21,10 +21,10 @@
 <!-- Filtros -->
 <section class="py-4 md:py-6 bg-gray-50 border-b border-gray-200" x-data="{ filtersOpen: false }">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Botão toggle mobile -->
+        <!-- Abaixo de 1024 px, os filtros recolhem para preservar o espaço da busca. -->
         <button 
             @click="filtersOpen = !filtersOpen" 
-            class="md:hidden w-full flex items-center justify-between px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-700 font-medium"
+            class="lg:hidden w-full flex items-center justify-between px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-700 font-medium"
         >
             <span class="flex items-center gap-2">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,8 +44,8 @@
         <form 
             action="{{ route('pesquisa.index') }}" 
             method="GET" 
-            class="flex-col md:flex-row gap-4 mt-4 md:mt-0" 
-            :class="{ 'hidden md:flex': !filtersOpen, 'flex': filtersOpen }"
+            class="flex-col lg:flex-row gap-4 mt-4 lg:mt-0"
+            :class="{ 'hidden lg:flex': !filtersOpen, 'flex': filtersOpen }"
         >
             <!-- Busca -->
             <div class="flex-1">
@@ -60,7 +60,7 @@
             </div>
 
             <!-- Área -->
-            <div class="w-full md:w-64">
+            <div class="w-full lg:w-48">
                 <select
                     name="area"
                     aria-label="Filtrar por área"
@@ -76,7 +76,7 @@
             </div>
             
             <!-- Tipo -->
-            <div class="w-full md:w-48">
+            <div class="w-full lg:w-48">
                 <select 
                     name="tipo" 
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
@@ -91,7 +91,7 @@
             </div>
             
             <!-- Ano -->
-            <div class="w-full md:w-36">
+            <div class="w-full lg:w-36">
                 <select 
                     name="ano" 
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"

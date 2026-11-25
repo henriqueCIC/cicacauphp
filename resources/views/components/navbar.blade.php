@@ -9,7 +9,7 @@
             </div>
 
             <!-- Mobile Search (Center) -->
-            <div class="lg:hidden flex-1 flex justify-center px-20">
+            <div class="xl:hidden flex-1 flex justify-center px-20">
                 <button @click="$dispatch('search-open')" class="text-gray-700 hover:text-primary p-2 transition-colors cursor-pointer">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -17,8 +17,8 @@
                 </button>
             </div>
 
-            <!-- Desktop Menu -->
-            <div class="hidden lg:flex lg:items-center lg:space-x-6">
+            <!-- O menu completo começa em 1280 px para não sobrepor Contato, busca e login. -->
+            <div class="hidden xl:flex xl:items-center xl:space-x-6">
                 <a href="{{ route('home') }}" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">
                     Início
                 </a>
@@ -99,7 +99,7 @@
             </div>
 
             <!-- Search and Login (Right Side) -->
-            <div class="hidden lg:flex lg:items-center lg:gap-4 absolute right-4 sm:right-6 lg:right-8">
+            <div class="hidden xl:flex xl:items-center xl:gap-4 absolute right-4 sm:right-6 lg:right-8">
                 <!-- Search Button with Shortcut -->
                 <button @click="$dispatch('search-open')" class="flex items-center gap-2 text-gray-700 hover:text-primary hover:bg-gray-50 px-3 py-2 rounded-lg transition-all cursor-pointer border border-gray-200 group">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +118,7 @@
             </div>
 
             <!-- Mobile menu button -->
-            <div class="lg:hidden absolute right-4">
+            <div class="xl:hidden absolute right-4">
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-700 hover:text-primary p-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -137,7 +137,7 @@
          x-transition:leave="transition ease-in duration-150"
          x-transition:leave-start="opacity-100 translate-y-0"
          x-transition:leave-end="opacity-0 -translate-y-1"
-         class="lg:hidden fixed inset-0 top-20 bg-white z-40 flex flex-col">
+         class="xl:hidden fixed inset-0 top-20 bg-white z-40 flex flex-col">
         <div class="flex-1 overflow-y-auto px-4 pt-4 pb-4 space-y-1">
             <a href="{{ route('home') }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors">
                 Início
